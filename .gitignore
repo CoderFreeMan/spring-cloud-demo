@@ -1,0 +1,16 @@
+# idea config file
+.idea/
+*.iml
+
+# class file
+*.class
+
+# log file
+*.log
+
+# package file
+*.jar
+*.war
+
+# target derictory
+target/

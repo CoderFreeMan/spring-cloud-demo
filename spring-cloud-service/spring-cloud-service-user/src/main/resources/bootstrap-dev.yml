@@ -1,0 +1,30 @@
+server:
+  port: 8081
+demo:
+  eureka:
+    url: http://127.0.0.1:7080/eureka/
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${demo.eureka.url}
+spring:
+  application:
+    name: demo-service-user
+  cloud:
+    config:
+      name: ${spring.application.name} #对应资源文件（git）上文件名
+      profile: dev
+      label: master
+      discovery:
+        enabled: true
+        service-id: demo-server-config #配置中心名
+fegin:
+  hystrix:
+    enabled: true #开户熔断机制
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMillisecond: 15000 #熔断机制，超时时间

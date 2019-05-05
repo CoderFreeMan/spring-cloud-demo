@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="5 seconds">
+
+	<property name="log.base" value="/temp/logs/config/config"/>
+	<property name="log.level.debug" value="DEBUG"/>
+	<property name="log.level.info" value="INFO"/>
+	<property name="log.level.error" value="ERROR"/>
+
+	<!-- Console stdout -->
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%-20(%d{HH:mm:ss.SSS} [%thread]) %-5level %logger{80} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!--#INFO Appender (Store info message, rolling with daily,The default log for 30 days) -->
+	<appender name="RollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>${log.level.info}</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${log.base}.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} %-4relative [%thread] %-5level %logger{80} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!--#ERROR Appender (Store error message, rolling with daily,The default log for 30 days) -->
+	<appender name="ErrorRollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>${log.level.error}</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${log.base}-error.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} %-4relative [%thread] %-5level %logger{80} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!--#TraceFile Appender (Store debug message, rolling with 100M, 10 files, threshold is OFF)-->
+	<appender name="TraceRollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${log.base}-trace.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<fileNamePattern>${log.base}-trace%i.log.zip</fileNamePattern>
+			<minIndex>1</minIndex>
+			<maxIndex>10</maxIndex>
+		</rollingPolicy>
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<maxFileSize>100MB</maxFileSize>
+		</triggeringPolicy>
+		<encoder>
+			<pattern>%date %-4relative [%thread] %-5level %logger{80} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!--<appender name="RecoredLoginErrorFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${log.base}-loginError.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<fileNamePattern>${log.base}-loginError%i.log.zip</fileNamePattern>
+			<minIndex>1</minIndex>
+			<maxIndex>10</maxIndex>
+		</rollingPolicy>
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<maxFileSize>100MB</maxFileSize>
+		</triggeringPolicy>
+		<encoder>
+			<pattern>%date %-4relative [%thread] %-5level %logger{80} - %msg%n</pattern>
+		</encoder>
+	</appender>-->
+
+	<logger name="com.xwd.spring.cloud.demo">
+		<appender-ref ref="RollingFile"/>
+	</logger>
+
+	<logger name="com.xwd.spring.cloud.demo">
+		<appender-ref ref="ErrorRollingFile"/>
+	</logger>
+
+	<logger name="org.springframework" level="${log.level.info}"/>
+	<logger name="org.hibernate.validator" level="${log.level.info}"/>
+	<logger name="org.springframework.boot.web.servlet.FilterRegistrationBean" level="${log.level.error}"/>
+	<logger name="org.apache.http" level="${log.level.error}"/>
+	<logger name="org.springframework.boot.actuate.endpoint.jmx.EndpointMBeanExporter" level="${log.level.info}"/>
+	<logger name="com.netflix.discovery" level="${log.level.error}"/>
+	<logger name="org.springframework.boot.actuate.endpoint.mvc.EndpointHandlerMapping" level="${log.level.error}"/>
+	<logger name="org.springframework.boot.actuate.endpoint.jmx.EndpointMBeanExporter" level="${log.level.error}"/>
+	<logger name="org.springframework.jmx.export.annotation.AnnotationMBeanExporter" level="${log.level.error}"/>
+	<logger name="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping" level="${log.level.error}"/>
+	<logger name="org.springframework.cloud.netflix.eureka.EurekaDiscoveryClientConfiguration" level="${log.level.error}"/>
+	<logger name="com.netflix.config.sources.URLConfigurationSource" level="${log.level.error}"/>
+	<logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" level="${log.level.error}"/>
+	<logger name="com.netflix.eureka.resources.InstanceResource" level="${log.level.info}"/>
+
+
+	<root level="${log.level.debug}">
+		<appender-ref ref="stdout"/>
+		<appender-ref ref="RollingFile"/>
+		<appender-ref ref="ErrorRollingFile"/>
+		<appender-ref ref="TraceRollingFile"/>
+	</root>
+</configuration>
+

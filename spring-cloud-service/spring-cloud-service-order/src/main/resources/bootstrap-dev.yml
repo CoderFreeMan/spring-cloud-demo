@@ -1,0 +1,14 @@
+server:
+  port: 8080
+#  tomcat:
+#    max-threads: 10 #把线程数调小测试熔断机制
+spring:
+  application:
+    name: demo-service-order
+demo:
+  eureka:
+    url: http://127.0.0.1:7080/eureka/ #固定写法，eureka为服务注册地址
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${demo.eureka.url}
