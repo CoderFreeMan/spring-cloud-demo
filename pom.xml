@@ -2,18 +2,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.xwd.spring.cloud.demo</groupId>
     <artifactId>spring-cloud-demo</artifactId>
-    <packaging>pom</packaging>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <!--<version>1.5.9.RELEASE</version>-->
-        <version>1.4.7.RELEASE</version>
+        <version>2.1.6.RELEASE</version>
     </parent>
 
     <modules>
@@ -27,9 +26,8 @@
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-        <junit.version>3.8.1</junit.version>
-        <spring.cloud.version>Camden.SR6</spring.cloud.version>
+        <junit.version>4.12</junit.version>
+        <spring.cloud.version>Finchley.SR2</spring.cloud.version>
         <commons-beanutils.version>1.9.3</commons-beanutils.version>
     </properties>
 
@@ -38,8 +36,7 @@
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
-                <version>${junit.version}</version>
-                <scope>test</scope>
+                <version>${junit.version}}</version>
             </dependency>
 
             <dependency>
@@ -57,10 +54,16 @@
             </dependency>
 
             <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-eureka</artifactId>
+                <version>1.2.6.RELEASE</version>
+            </dependency>
+
+            <!--<dependency>
                 <groupId>com.xwd.spring.cloud.demo</groupId>
                 <artifactId>spring-cloud-common</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
-            </dependency>
+            </dependency>-->
         </dependencies>
     </dependencyManagement>
 
@@ -68,11 +71,6 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-config</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-eureka</artifactId>
         </dependency>
 
         <dependency>
@@ -84,6 +82,7 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-feign</artifactId>
+            <version>1.2.6.RELEASE</version>
         </dependency>
 
         <dependency>

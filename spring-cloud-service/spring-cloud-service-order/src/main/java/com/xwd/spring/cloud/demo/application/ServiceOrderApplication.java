@@ -18,7 +18,7 @@ import org.springframework.context.annotation.ComponentScan;
         "com.xwd.spring.cloud.demo.order.service"
 })
 @EnableEurekaClient
-@EnableFeignClients("com.xwd.spring.cloud.demo.order.client")
+@EnableFeignClients("com.xwd.spring.cloud.demo.order.web")
 public class ServiceOrderApplication {
 
     public static void main(String[] args) {
