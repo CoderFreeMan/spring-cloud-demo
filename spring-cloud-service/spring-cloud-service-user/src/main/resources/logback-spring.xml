@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="5 seconds">
 
-	<property name="log.base" value="/temp/logs/service-user/service-user"/>
+	<property name="log.base" value="logs/service-user/service-user"/>
 	<property name="log.level.debug" value="DEBUG"/>
 	<property name="log.level.info" value="INFO"/>
 	<property name="log.level.error" value="ERROR"/>
