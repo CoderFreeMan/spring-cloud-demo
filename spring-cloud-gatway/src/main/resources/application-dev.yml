@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: demo-zuul-gateway
+  main:
+    allow-bean-definition-overriding: true
 demo:
   eureka:
     url: http://127.0.0.1:7080/eureka/ #固定写法，eureka为服务注册地址

@@ -1,0 +1,14 @@
+server:
+  port: 7080
+spring:
+  application:
+    name: demo-eureka-registry
+eureka:
+  instance:
+    hostname: ${spring.application.name} #注册中心名
+    instance-id: 127.0.0.1
+  client:
+    register-with-eureka: false #禁止注册自己
+    fetch-registry: false #禁止调用自己
+    serviceUrl:
+      defaultZone: http://${eureka.instance.instance-id}:${server.port}/eureka/ #注册中心地址

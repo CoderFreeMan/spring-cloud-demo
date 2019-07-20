@@ -1,0 +1,33 @@
+server:
+  port: 7082
+demo:
+  eureka:
+    url: http://127.0.0.1:7080/eureka/ #固定写法，eureka为服务注册地址
+  spring:
+    git:
+#      uri:  https://git.coding.net/kzgfr/spring-cloud-demo.git
+      uri:  https://git.coding.net/kzgfr/demo-parent-trunk.git
+spring:
+  application:
+    name: demo-server-config
+  cloud:
+    config:
+      server:
+        git:
+          uri: ${demo.spring.git.uri}
+          default-label: master
+#          search-paths: /demo-resources-repo #配置文件地址（git）
+          search-paths: /spring-cloud-demo/demo-resources-repo #配置文件地址（git）
+          username: kzgfr
+          password: kzgfrlong
+  redis:
+    host: 192.168.0.201
+#    host: ${demo.redis.session.host}
+    port: 6379
+    password: 11223344
+#    password: ${demo.redis.session.password}
+    database: 4
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${demo.eureka.url}
